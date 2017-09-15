@@ -76,14 +76,6 @@ except ldap.LDAPError, e:
     sys.exit()
 
 scan_dyn_group_res = l.search_s(options.src_dn,ldap.SCOPE_SUBTREE, options.filter, options.attrs)
-
-
-#print "scan_dyn_group_res:"
-#pprint(scan_dyn_group_res)
-#print "-"*32
-
-
-
 attrs = {}
 attrs['objectclass'] = ['top','groupofnames']
 member_list = set()
@@ -91,20 +83,10 @@ for dyn_group_res in scan_dyn_group_res:
    member_list.update(dyn_group_res[1]['member'])
 
 attrs['member'] = list(member_list)
-
-#  attrs['member'] = scan_dyn_group_res[0][dyn_group_res]['member']
 attrs['description'] = 'Autoedited group from python script '+str(datetime.datetime.now())
-
-#print "Attrs:"
-#pprint(attrs)
-#print "-"*32
-
 
 try:
   scan_old_group_search = l.search_s(options.dst_dn,ldap.SCOPE_SUBTREE, '(objectClass=*)', ['objectclass','member','description'])
-#  print "scan_old_group_res:"
-#  pprint(scan_old_group_search)
-#  print "-"*32
   ldif = modlist.modifyModlist(scan_old_group_search[0][1],attrs)
   l.modify_s(options.dst_dn,ldif)
 
