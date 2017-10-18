@@ -4,7 +4,6 @@ import ldap
 import sys
 import ldap.modlist as modlist
 import datetime
-from pprint import pprint
 from optparse import OptionParser
 import ConfigParser
 
