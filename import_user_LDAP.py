@@ -42,34 +42,24 @@ parser.add_option("-l", "--passwlen", default="", dest="passwdlen", help="maximu
 
 
 (options, args) = parser.parse_args()
-if (len(args) > 0):
-    options.filter = args[0]
-    if (len(args) > 1):
-        options.attrs = args[1]
-        if (len(args) > 2):
-            parser.error("incorrect number of arguments")
-    else:
-        options.attrs = ['member']
-elif (options.filename):
-    if not(options.config_section):
-        parser.error("Options -f <filename> have to use with -c config_section")
-        sys.exit()
 
-    config = ConfigParser.ConfigParser()
-    config.read(options.filename)
-    options.verbose     = config.get(options.config_section, 'verbose', 0)
-    options.server      = config.get(options.config_section, 'server', 0)
-    options.src_dn      = config.get(options.config_section, 'base_dn', 0)
-    options.dst_dn      = config.get(options.config_section, 'dst_dn', 0)
-    options.bind_dn     = config.get(options.config_section, 'bind_dn', 0)
-    options.bind_pwd    = config.get(options.config_section, 'bind_pwd', 0)
-    options.filter      = config.get(options.config_section, 'filter', 0)
-    options.passwdlen   = int(config.get(options.config_section, 'passwdlen', 0))
-    options.excsheet   = int(config.get(options.config_section, 'excsheet', 0))
-    options.excfile   = int(config.get(options.config_section, 'excfile', 0))
-    options.attrs = ['']
-else:
-    parser.error("incorrect number of arguments")
+if (options.filename) && not(options.config_section):
+    parser.error("Options -f <filename> have to use with -c config_section")
+    sys.exit()
+
+config = ConfigParser.ConfigParser()
+config.read(options.filename)
+options.verbose     = config.get(options.config_section, 'verbose', 0)
+options.server      = config.get(options.config_section, 'server', 0)
+options.src_dn      = config.get(options.config_section, 'base_dn', 0)
+options.dst_dn      = config.get(options.config_section, 'dst_dn', 0)
+options.bind_dn     = config.get(options.config_section, 'bind_dn', 0)
+options.bind_pwd    = config.get(options.config_section, 'bind_pwd', 0)
+options.filter      = config.get(options.config_section, 'filter', 0)
+options.passwdlen   = int(config.get(options.config_section, 'passwdlen', 0))
+options.excsheet   = int(config.get(options.config_section, 'excsheet', 0))
+options.excfile   = int(config.get(options.config_section, 'excfile', 0))
+options.attrs = ['']
 
 if not (options.dst_dn):
     parser.error("options -d must set")
