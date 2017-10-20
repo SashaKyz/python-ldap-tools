@@ -11,6 +11,7 @@ import unicodedata
 from passlib.hash import ldap_md5_crypt
 import string
 import random
+import xlsxwriter
 
 def pw_gen(size = 12, chars=string.ascii_letters + string.digits ):
     return ''.join(random.choice(chars) for _ in range(random.randint(8,size)))
@@ -82,6 +83,9 @@ for s in wb.sheets():
         values.append(col_value)
 
 
+workbook = xlsxwriter.Workbook(options.excfile)
+worksheet = workbook.add_worksheet(options.excsheet)
+
 l = ldap.initialize(options.server)
 try:
     l.simple_bind_s(options.bind_dn,options.bind_pwd)
@@ -99,6 +103,7 @@ attrs1['objectclass'] = ['top','groupofnames']
 attrs1['member'] = ['cn=ldap search,ou=People,dc=cwds,dc=io']
 attrs1['description'] = 'Autoedited group from python script '+str(datetime.datetime.now())
 member_list = set()
+row=1
 try:
     scan_old_group_search = l.search_s(options.dst_dn,ldap.SCOPE_SUBTREE, '(objectClass=*)', ['objectclass','member','description'])
 
@@ -131,12 +136,16 @@ for keys in values:
         print "Creating user\tDN:",dn,"\t\tUID: ",keys[4][1]
         l.add_s(dn,ldif)
         member_list.add(dn)
-
-
+        row +=1
+        worksheet.write(row,1, attrs['givenName'])
+        worksheet.write(row,2, attrs['sn'])
+        worksheet.write(row,3, attrs['mail'])
+        worksheet.write(row,3, userpassword)
 
 attrs1['member'] = list(member_list)
 ldif1 = modlist.modifyModlist(scan_old_group_search[0][1],attrs1)
-l.modify_s(options.dst_dn,ldif1)
-
+if (attrs1['member'] != []):
+    l.modify_s(options.dst_dn,ldif1)
+workbook.close()
 l.unbind()
 
