@@ -43,7 +43,7 @@ parser.add_option("-l", "--passwlen", default="", dest="passwdlen", help="maximu
 
 (options, args) = parser.parse_args()
 
-if (options.filename) && not(options.config_section):
+if (options.filename) and not(options.config_section):
     parser.error("Options -f <filename> have to use with -c config_section")
     sys.exit()
 
