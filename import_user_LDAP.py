@@ -103,7 +103,7 @@ attrs1['objectclass'] = ['top','groupofnames']
 attrs1['member'] = ['cn=ldap search,ou=People,dc=cwds,dc=io']
 attrs1['description'] = 'Autoedited group from python script '+str(datetime.datetime.now())
 member_list = set()
-row=1
+row=0
 try:
     scan_old_group_search = l.search_s(options.dst_dn,ldap.SCOPE_SUBTREE, '(objectClass=*)', ['objectclass','member','description'])
 
