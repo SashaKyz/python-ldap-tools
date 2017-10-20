@@ -57,8 +57,8 @@ options.bind_dn     = config.get(options.config_section, 'bind_dn', 0)
 options.bind_pwd    = config.get(options.config_section, 'bind_pwd', 0)
 options.filter      = config.get(options.config_section, 'filter', 0)
 options.passwdlen   = int(config.get(options.config_section, 'passwdlen', 0))
-options.excsheet   = int(config.get(options.config_section, 'excsheet', 0))
-options.excfile   = int(config.get(options.config_section, 'excfile', 0))
+options.excsheet    = config.get(options.config_section, 'excsheet', 0)
+options.excfile     = config.get(options.config_section, 'excfile', 0)
 options.attrs = ['']
 
 if not (options.dst_dn):
