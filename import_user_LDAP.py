@@ -137,9 +137,9 @@ for keys in values:
         l.add_s(dn,ldif)
         member_list.add(dn)
         row +=1
-        worksheet.write(row,1, attrs['givenName'])
-        worksheet.write(row,2, attrs['sn'])
-        worksheet.write(row,3, attrs['mail'])
+        worksheet.write(row,0, attrs['givenName'])
+        worksheet.write(row,1, attrs['sn'])
+        worksheet.write(row,2, attrs['mail'])
         worksheet.write(row,3, userpassword)
 
 attrs1['member'] = list(member_list)
