@@ -5,7 +5,7 @@ import re
 
 for root, dirs, files in os.walk(".."):
     for file in files:
-        if (((file.find("docker-compose")!=-1) and (file.endswith(".yml")))or(file=='.env')):
+        if (((file.find("docker-compose")!=-1) and (file.endswith(".yml")))or(file=='.env.j2')):
             appl=re.search("roles/(apptier/){,1}([\w,-]*)",root)
             #appl=re.search("roles(/apptier)",root)
             #print("Scan file: ",os.path.join(root, file),"Appplication: ",appl.group(2))
