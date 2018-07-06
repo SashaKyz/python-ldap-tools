@@ -6,6 +6,7 @@ import re
 for root, dirs, files in os.walk(".."):
     for file in files:
         if ((file.find("docker-compose")!=-1) and (file.endswith(".yml"))):
+            print("Scan file: ",os.path.join(root, file))
             application=re.match("roles/([\w,-]*)",os.path.join(root, file))
             if application:
                 print("Environment variable for: ",application.group(1))
