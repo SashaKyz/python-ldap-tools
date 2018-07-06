@@ -52,3 +52,5 @@ fabric.properties
 
 .gitignore
 .idea/
+/venv/
+venv/

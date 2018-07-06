@@ -1,0 +1,21 @@
+commit 0435adaf5d0ce2a525ec1bacfbbca59380298276
+Author: Oleksandr Serbin <Alex.Serbin@osi.ca.gov>
+Date:   Tue May 1 16:08:31 2018 -0700
+
+    Update integration.yaml
+
+    Please delete timestamp
+
+diff --git a/integration.yaml b/integration.yaml
+index 22aec4b..49eb577 100644
+--- a/integration.yaml
++++ b/integration.yaml
+@@ -2,7 +2,7 @@
+ api: 0.6.4.372
+ cals: 0.64-96
+ cals-api: 0.6.4_1187-RC
+-cals-jobs: 0.6.4_719-RC
++cals-jobs: 0.6.4_723-RC
+ case-management-api: 0.6.3_804-RC
+ case-management: 376
+ dashboard: 3d1f6db
