@@ -8,7 +8,7 @@ for root, dirs, files in os.walk(".."):
         if ((file.find("docker-compose")!=-1) and (file.endswith(".yml"))):
             appl=re.search("roles/(apptier/){,1}([\w,-]*)",root)
             #appl=re.search("roles(/apptier)",root)
-            print("Scan file: ",os.path.join(root, file),"Appplication: ",appl.group(2))
+            #print("Scan file: ",os.path.join(root, file),"Appplication: ",appl.group(2))
             if appl:
                 print("Environment variable for: ",appl.group(2))
                 shakes = open(os.path.join(root, file), "r")
