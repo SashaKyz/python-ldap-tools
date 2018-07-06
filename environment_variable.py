@@ -10,20 +10,20 @@ for root, dirs, files in os.walk(".."):
             #appl=re.search("roles(/apptier)",root)
             #print("Scan file: ",os.path.join(root, file),"Appplication: ",appl.group(2))
             if appl:
-                print("\nEnvironment variable for: "+appl.group(2)+" (file:"+file+")")
+                print("\n*Environment variable for: "+appl.group(2)+" (file:"+file+")")
                 shakes = open(os.path.join(root, file), "r")
                 for line in shakes:
                     sub_line=re.match("^\s*-\s(\w*)=.*",line)
                     if sub_line:
-                        print ("\t"+sub_line.group(1))
+                        print ("**"+sub_line.group(1))
         if (file=='.env.j2'):
             appl=re.search("roles/(apptier/){,1}([\w,-]*)",root)
             #appl=re.search("roles(/apptier)",root)
             #print("Scan file: ",os.path.join(root, file),"Appplication: ",appl.group(2))
             if appl:
-                print("Environment variable for: "+appl.group(2)+" ("+file+")")
+                print("*Environment variable for: "+appl.group(2)+" ("+file+")")
                 shakes = open(os.path.join(root, file), "r")
                 for line in shakes:
                     sub_line=re.match("^\s*(\w*)=.*",line)
                     if sub_line:
-                        print ("\t"+sub_line.group(1))
+                        print ("**"+sub_line.group(1))
