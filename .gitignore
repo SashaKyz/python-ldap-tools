@@ -54,3 +54,4 @@ fabric.properties
 .idea/
 /venv/
 venv/
+!/elasticsearch.cfg
