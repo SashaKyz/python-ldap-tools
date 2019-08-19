@@ -52,3 +52,6 @@ fabric.properties
 
 .gitignore
 .idea/
+/venv/
+venv/
+!/elasticsearch.cfg

@@ -63,6 +63,7 @@ if not (options.dst_dn):
 if (options.verbose == True ):
         print("reading %s..." % options.filename)
 
+ldap.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_NEVER)
 l = ldap.initialize(options.server)
 try:
     l.simple_bind_s(options.bind_dn,options.bind_pwd)
@@ -82,7 +83,7 @@ for dyn_group_res in scan_dyn_group_res:
    member_list.update(dyn_group_res[1]['member'])
 
 attrs['member'] = list(member_list)
-attrs['description'] = 'Autoedited group from python script '+str(datetime.datetime.now())
+attrs['description'] = ['Autoedited group from python script {:%Y-%m-%d %H:%M:%S} '.format(datetime.datetime.now())]
 
 try:
   scan_old_group_search = l.search_s(options.dst_dn,ldap.SCOPE_SUBTREE, '(objectClass=*)', ['objectclass','member','description'])
@@ -91,7 +92,7 @@ try:
 
 except ldap.LDAPError, e:
     if type(e.message) == dict and e.message.has_key('desc') and (e.message['desc']=='No such object') :
-        print "Can't update group %s Error: %s. Try to create new. " % options.dst_dn, e.message['desc']
+        print "Can't update group %s Error: %. Try to create new. " % options.dst_dn, e.message['desc']
         ldif = modlist.addModlist(attrs)
         l.add_s(options.dst_dn,ldif)
         sys.exit()
